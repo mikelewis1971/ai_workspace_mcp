@@ -12,8 +12,8 @@ LM Studio will open it automatically if you go to the **Program** tab → **Inst
 ```json
 {
   "mcpServers": {
-    "ai-workspace-ultimate": {
-      "name": "AI Workspace MCP Server - Ultimate Hybrid Edition",
+    "ai-workspace": {
+      "name": "AI Workspace MCP Server ",
       "description": "Self-upgrading, self-healing AI workspace with file ops, OCR, vision, mouse/keyboard control, evolving RAG, and full self-upgrade/restore capabilities. Built for LM Studio local models.",
       "command": "python",
       "args": [
@@ -36,7 +36,7 @@ LM Studio will open it automatically if you go to the **Program** tab → **Inst
 ### 2. Updated Installation Guide (replaces the previous MD)
 
 ```markdown
-# AI Workspace MCP Server - Ultimate Hybrid Edition
+# AI Workspace MCP Server 
 **Self-Upgrading + Self-Healing AI Workspace for LM Studio & JAN.ai**
 
 **Version:** Self-Upgrading (v2026.04)
