@@ -1,3 +1,7 @@
+Do you use LM Studio or Jan?  Or even just Python and LLama.cpp?  If so, you need this mcp server.  You don't need any third party vendors.  All the apps are selfcontained and private to your local system.  All you need do is download LM Studio or Jan.ai, download a model (I highly suggest a Qwen 3.5 Claude version), copy and paste this into your mcp.json and reload your AI.  Done.
+
+Well, you may have to debug for your particular system.  This works on my system perfectly but it may not on yours.  Never fear.  If you don't know how to debug, simply download Anitgravity from Google and ask the model to read this repo, find your current copy of LM Studio or Jan and get the mcp.json aligned to your system.  The Antigravity model from Google will fix any issues you may have.
+
 # ai_workspace_mcp
 ```markdown
 # AI Workspace MCP Server - Ultimate Hybrid Edition
