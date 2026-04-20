@@ -147,7 +147,7 @@ It’s right here on your desktop — and it can improve itself.
 Copy the `mcp.json` above into LM Studio, save, toggle the server on, and you’re done.  
 The updated guide includes the exact steps so anyone can follow it.
 
-
+---
 
 Links:
 https://lmstudio.ai/
