@@ -3,202 +3,145 @@ Do you use LM Studio or Jan?  Or even just Python and LLama.cpp?  If so, you nee
 Well, you may have to debug for your particular system.  This works on my system perfectly but it may not on yours.  Never fear.  If you don't know how to debug, simply download Anitgravity from Google and ask the model to read this repo, find your current copy of LM Studio or Jan and get the mcp.json aligned to your system.  The Antigravity model from Google will fix any issues you may have.
 
 # ai_workspace_mcp
+
+### 1. The Full `mcp.json` for LM Studio
+
+Create (or edit) this file in your LM Studio configuration folder.  
+LM Studio will open it automatically if you go to the **Program** tab → **Install** → **Edit mcp.json**.
+
+```json
+{
+  "mcpServers": {
+    "ai-workspace-ultimate": {
+      "name": "AI Workspace MCP Server - Ultimate Hybrid Edition",
+      "description": "Self-upgrading, self-healing AI workspace with file ops, OCR, vision, mouse/keyboard control, evolving RAG, and full self-upgrade/restore capabilities. Built for LM Studio local models.",
+      "command": "python",
+      "args": [
+        "F:/AI Sandbox/ai_workspace_mcp.py"
+      ],
+      "env": {},
+      "workingDirectory": "F:/AI Sandbox",
+      "enabled": true
+    }
+  }
+}
+```
+
+**Important notes for this config:**
+- Change the paths only if your folder is somewhere else.
+- The `command` is `python` (it will use whatever `python` is in your PATH — the Windows Python that has the `mcp` package installed).
+- `workingDirectory` must match exactly where your `ai_workspace_mcp.py` lives.
+- After saving, toggle the server **ON** in the Program tab (or restart LM Studio).
+
+### 2. Updated Installation Guide (replaces the previous MD)
+
 ```markdown
 # AI Workspace MCP Server - Ultimate Hybrid Edition
 **Self-Upgrading + Self-Healing AI Workspace for LM Studio & JAN.ai**
 
-**Version:** Self-Upgrading (v2026.04)  
-**Author:** Built for local AI agents that can improve themselves
+**Version:** Self-Upgrading (v2026.04)
 
 ---
 
 ## What Is This?
 
-This is a **full-featured MCP (Model Context Protocol) server** that turns your local LLM (running in LM Studio or JAN.ai) into a powerful AI agent that can:
-
-- Control your Windows desktop (mouse, keyboard, screenshots)
-- Run Python code in Windows **or** WSL Conda environments
-- Perform OCR on any screenshot
-- Build an **evolving RAG** memory that survives restarts
-- **Upgrade its own code** safely (with automatic backups)
-- **Restore itself completely** if anything gets fucked up
-- Read/write files, browse websites, and more
-
-It is designed specifically for **smaller local models** (Qwen3 0.8B–8B, etc.) that are not as smart as commercial AIs. Every tool description contains explicit instructions so the model cannot easily make mistakes.
+A complete, local-first MCP server that turns any LM Studio (or JAN.ai) model into a powerful, self-improving AI agent that can control your desktop, remember everything, upgrade its own code, and recover if anything ever breaks.
 
 ---
 
-## Core Features
-
-- **Hybrid Execution**: Windows native + WSL Ubuntu 24.04
-- **Evolving RAG** – conversation memory that compresses and persists forever
-- **Self-Upgrade Tool** – the AI can rewrite its own `.py` file
-- **Self-Restore Tool** – one-click recovery from any backup ZIP
-- **Git-aware Backups** – automatically commits originals to git if repo exists
-- **Vision & Automation** – take screenshots, read text, click buttons, type, etc.
-- **OCR Tool** – extract text from any image/screenshot
-
----
-
-## Installation (LM Studio or JAN.ai)
+## Installation (LM Studio – Recommended)
 
 ### Step 1: Prerequisites
-1. Windows 10/11
-2. **Python 3.10+** installed on Windows (add to PATH)
-3. **WSL + Ubuntu 24.04** (recommended but not required)
-4. **Conda** installed in WSL (Miniforge or Anaconda)
-5. LM Studio **or** JAN.ai running with a local model (recommended: `qwen3.5-0.8b` or `qwen3.5-4b`)
+- Windows 10/11
+- Python 3.10+ (added to PATH)
+- WSL + Ubuntu 24.04 (optional but excellent for Conda)
+- LM Studio (latest version – 0.3.17 or newer)
 
-### Step 2: Download & Place Files
-1. Create folder: `F:\AI Sandbox`
-2. Save the latest `ai_workspace_mcp.py` into that folder (the file you just upgraded or the one provided).
-3. (Optional but recommended) Initialize git in the folder:
-   ```bash
-   cd "F:\AI Sandbox"
-   git init
-   ```
+### Step 2: Create the Workspace
+1. Create the folder: `F:\AI Sandbox`
+2. Place your `ai_workspace_mcp.py` file inside it.
 
-### Step 3: Install Dependencies (one-time)
-Open **PowerShell as Administrator** and run:
+### Step 3: One-Time Setup
+In **PowerShell as Administrator**:
 ```powershell
 pip install mcp numpy
 ```
 
-In WSL (if using Conda environments):
+(If using WSL Conda):
 ```bash
 conda create -p /mnt/f/python_repos/envs/Basic python=3.12 -y
 conda activate /mnt/f/python_repos/envs/Basic
 pip install pillow pytesseract opencv-python numpy
 ```
 
-### Step 4: Run the MCP Server
-**Option A – LM Studio (recommended)**
-1. Start LM Studio
-2. Go to **Local Inference Server** → start server on `http://192.168.56.1:31415`
-3. In a separate terminal run:
-   ```powershell
-   cd "F:\AI Sandbox"
-   python ai_workspace_mcp.py
-   ```
+### Step 4: Configure LM Studio (the mcp.json part)
 
-**Option B – JAN.ai**
-1. Start JAN.ai
-2. Enable **MCP / Tool Use** in the model settings
-3. Load the MCP server the same way (JAN.ai supports stdio MCP servers)
+1. Open LM Studio.
+2. Go to the **Program** tab in the right sidebar.
+3. Click **Install** → **Edit mcp.json**.
+4. Replace the entire contents with the `mcp.json` below (or paste the server block into your existing file):
 
-The terminal should show:
+```json
+{
+  "mcpServers": {
+    "ai-workspace-ultimate": {
+      "name": "AI Workspace MCP Server - Ultimate Hybrid Edition",
+      "description": "Self-upgrading, self-healing AI workspace with file ops, OCR, vision, mouse/keyboard control, evolving RAG, and full self-upgrade/restore capabilities.",
+      "command": "python",
+      "args": ["F:/AI Sandbox/ai_workspace_mcp.py"],
+      "env": {},
+      "workingDirectory": "F:/AI Sandbox",
+      "enabled": true
+    }
+  }
+}
+```
+
+5. Save the file.
+6. In the Program tab, find the new server and toggle it **ON**.
+
+### Step 5: Start the Server
+The server now starts automatically when LM Studio launches (and when you toggle it on).  
+You will see this in the terminal/output pane:
 ```
 --- AI WORKSPACE MCP SERVER STARTING ---
 ```
 
-Leave this terminal **open** – it is the MCP server.
+---
+
+## Quick Start for Your Model
+
+Tell your model (in LM Studio chat):
+
+> "You are now connected to the Ultimate AI Workspace MCP Server. First, call `get_detailed_tool_usage_guide_and_examples` to see the full manual and all available tools."
+
+The model will immediately have access to every tool we built — including the self-upgrade and self-restore capabilities.
 
 ---
 
-## How Self-Upgrade & Self-Restore Work
+## Self-Upgrade & Self-Restore (Still Works Perfectly)
 
-### Upgrade Process (AI improves itself)
-1. The AI reads the current code using `read_content_from_file_at_path`
-2. It thinks of improvements
-3. It calls **`upgrade_mcp_server_code`** with the **full new code**
-4. The server:
-   - Saves the **exact original** as `_ORIGINAL_YYYYMMDD_HHMMSS.py`
-   - Commits it to git (if repo exists)
-   - Creates `MCP_SELF_UPGRADE_BACKUP_YYYYMMDD_HHMMSS.zip`
-   - Overwrites the `.py` file
-5. You manually **restart** the Python script
-
-### Restore Process (if upgrade breaks everything)
-1. The AI (or you) calls **`restore_mcp_from_backup`** with the ZIP path
-2. The server unzips the backup and replaces the current code with the working original
-3. Restart the server
-
-**You will always have a downloadable ZIP** of every previous version.
+- The AI can read its own code, improve it, and call `upgrade_mcp_server_code`.
+- It automatically creates a timestamped original backup + ZIP.
+- If anything ever breaks, it (or you) can call `restore_mcp_from_backup` with the ZIP path.
+- Git support is still there if you `git init` in the folder.
 
 ---
 
-## All Tools (with exact usage for local AIs)
+**You now have a complete, self-contained, self-healing local AI workspace.**
 
-### 1. `ping`
-**Purpose**: Health check  
-**Special Note for Local AI**: Always use this first to confirm the server is alive.  
-**Example call**:
-```json
-{"name": "ping"}
+The model literally owns its own tools, its own memory, and its own ability to evolve. Everything stays on your machine. Nothing is sent to the cloud.
+
+Start LM Studio, turn on the MCP server, and let your local model begin its new life.
+
+The future is no longer somewhere else.  
+It’s right here on your desktop — and it can improve itself.
 ```
 
-### 2. `get_detailed_tool_usage_guide_and_examples`
-**Purpose**: Get this entire manual + latest examples  
-**Special Note**: Call this whenever you feel unsure. It returns the most up-to-date instructions.
-
-### 3. `upgrade_mcp_server_code`
-**Purpose**: Let the AI upgrade its own code  
-**Special Note for Local AI**: Always read the current file first, then send the **complete** new script.  
-**Example**:
-```json
-{"name": "upgrade_mcp_server_code", "arguments": {"new_code": "#!/usr/bin/env python3\n...full code..."}}
-```
-
-### 4. `restore_mcp_from_backup`
-**Purpose**: Fix a broken upgrade  
-**Special Note**: Use the exact ZIP path returned by the upgrade tool.  
-**Example**:
-```json
-{"name": "restore_mcp_from_backup", "arguments": {"zip_path": "F:/AI Sandbox/MCP_SELF_UPGRADE_BACKUP_20260420_124700.zip"}}
-```
-
-### 5. `compress_conversation_turn_to_rag`
-**Purpose**: Add memory to the evolving RAG  
-**Special Note**: Use this after every important conversation turn.
-
-### 6. `query_evolving_rag`
-**Purpose**: Retrieve past context
-
-### 7. `get_rag_summary`
-**Purpose**: See current compressed memory
-
-(Full list of all 20+ tools with the same verbose "SPECIAL NOTE FOR LOCAL AI" is inside the server – just call `get_detailed_tool_usage_guide_and_examples` to see everything.)
-
 ---
 
-## Recommended Workflow for the AI
+**Ready to go.**
 
-1. Call `ping` → confirm server is alive
-2. Call `get_detailed_tool_usage_guide_and_examples` → read instructions
-3. Use `read_content_from_file_at_path` to see current MCP code
-4. Decide on improvements
-5. Call `upgrade_mcp_server_code` with new full code
-6. Tell user: "Upgrade complete – please restart the MCP server"
-7. (If something breaks) Call `restore_mcp_from_backup` with the ZIP
+Copy the `mcp.json` above into LM Studio, save, toggle the server on, and you’re done.  
+The updated guide includes the exact steps so anyone can follow it.
 
----
-
-## Troubleshooting
-
-**Server not responding?**  
-→ Restart the Python script in the terminal.
-
-**Upgrade failed?**  
-→ The ZIP was still created. Use `restore_mcp_from_backup`.
-
-**Path issues?**  
-→ Always use full Windows paths (`F:/AI Sandbox/...`) or WSL paths (`/mnt/f/AI Sandbox/...`).
-
-**Git not working?**  
-→ It falls back to local + ZIP – still safe.
-
-**Model keeps truncating code?**  
-→ Tell it: "Output the **entire** file without any summarization."
-
----
-
-## You now have a self-improving AI workspace.
-
-The AI can literally evolve its own tools, fix its own bugs, and maintain perfect memory across sessions.
-
-**Start the server, load it in LM Studio or JAN.ai, and tell the model:**
-
-> "You are now running inside the Ultimate AI Workspace MCP Server. You can upgrade and restore yourself. Begin by calling `get_detailed_tool_usage_guide_and_examples`."
-
-Enjoy your self-healing local AI agent!
-```
