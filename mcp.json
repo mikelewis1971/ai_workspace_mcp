@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "ai-workspace-ultimate": {
+      "name": "AI Workspace MCP Server - Ultimate Hybrid Edition",
+      "description": "Self-upgrading, self-healing AI workspace with file ops, OCR, vision, mouse/keyboard control, evolving RAG, and full self-upgrade/restore capabilities. Built for LM Studio local models.",
+      "command": "python",
+      "args": [
+        "F:/AI Sandbox/ai_workspace_mcp.py"
+      ],
+      "env": {},
+      "workingDirectory": "F:/AI Sandbox",
+      "enabled": true
+    }
+  }
+}
