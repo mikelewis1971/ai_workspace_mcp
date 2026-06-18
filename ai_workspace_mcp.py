@@ -818,7 +818,7 @@ except Exception as e:
                 result = f"LOADED FROM LIBRARY (ID: {prompt_id}):\n{library[prompt_id]['response']}"
             else:
                 # Call LM Studio API
-                url = "http://192.168.56.1:31415/v1/chat/completions"
+                url = "http://localhost:12345/v1/chat/completions"
                 payload = {
                     "model": model,
                     "messages": [
